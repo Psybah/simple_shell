@@ -1,59 +1,50 @@
 #include "shell.h"
 
-char *get_location(char *command) {
-    char *path, *path_copy, *path_token, *file_path;
-    int command_length, directory_length;
-    struct stat buffer;
+char *get_location(char *command)
+{
+	char *path, *path_copy, *path_token, *file_path;
+	int command_length, directory_length;
+	struct stat buffer;
 
+	path = getenv("PATH");
 
-    path = getenv("PATH");
+	if (path)
+	{
+		path_copy = strdup(path);
+		command_length = strlen(command);
 
+		path_token = strtok(path_copy, ":");
 
-    if (path){
-	    /* Duplicate the path string -> don't forget to free up memory for this because strdup allocates memory that needs to be freed */
-	    path_copy = strdup(path);
-	    /* get the lenght of the command that was passed */
-	    command_length = strlen(command);
+		while (path_token != NULL)
+		{
+			directory_length = strlen(path_token);
+			file_path = malloc(command_length + directory_length + 2);
+			strcpy(file_path, path_token);
+			strcat(file_path, "/");
+			strcat(file_path, command);
+			strcat(file_path, "\0");
 
-	    /* breakdown all the path varibles and get all the directories available */
-	    path_token = strtok(path_copy, ":");
+			if (stat(file_path, &buffer) == 0)
+			{
+				free(path_copy);
+				return (file_path);
+			}
+			else
+			{
+				free(file_path);
+				path_token = strtok(NULL, ":");
+			}
+		}
 
-	    while(path_token != NULL){
-		    /* get length of the directory */
-		    directory_length = strlen(path_token);
-		    file_path = malloc (command_length + directory_length + 2);
-		    strcpy(file_path, path_token);
-		    strcat(file_path, "/");
-		    strcat(file_path, command);
-		    strcat(file_path, "\0");
+		free(path_copy);
+		if (stat(command, &buffer) == 0)
+		{
+			return (command);
+		}
 
-		    if (stat(file_path, &buffer) == 0){
-			    free(path_copy);
+		return (NULL);
+	}
 
-			    return (file_path);
-		    }
-		    else{
-			    free(file_path);
-			    path_token = strtok(NULL, ":");
-
-		    }
-
-	    }
-
-	    free(path_copy);
-	    if (stat(command, &buffer) == 0)
-	    {
-		    return (command);
-	    }
-
-
-	    return (NULL);
-
-
-    }
-
-    return (NULL);
-
-
+	return (NULL);
 }
 
