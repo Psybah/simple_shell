@@ -1,6 +1,6 @@
 #include "shell.h"
 
-int main(int ac, char **argv){
+int main(int ac, char **argv) {
     char *prompt = "(Myshell) $ ";
     char *lineptr = NULL, *lineptr_copy = NULL;
     size_t n = 0;
@@ -10,7 +10,7 @@ int main(int ac, char **argv){
     char *token;
     int i;
 
-    /* declaring the void variables */
+    /* declaring void variables */
     (void)ac;
 
     /* Create a loop for the shell's prompt */
