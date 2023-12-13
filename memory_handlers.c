@@ -111,4 +111,3 @@ void *_calloc(unsigned int size)
 	}
 	return (a);
 }
-
