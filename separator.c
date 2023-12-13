@@ -33,4 +33,3 @@ char **separator(char *input)
 
 	return (commands);
 }
-
