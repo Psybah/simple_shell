@@ -95,4 +95,3 @@ int _atoi(char *s)
 	l *= j;
 	return (l);
 }
-

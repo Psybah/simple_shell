@@ -118,4 +118,3 @@ int intlen(int num)
 	}
 	return (len);
 }
-
