@@ -7,4 +7,3 @@ void prompt(void)
 {
 	PRINT("$ ");
 }
-
