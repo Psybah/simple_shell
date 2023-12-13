@@ -6,13 +6,25 @@ void execute_command(const char *command)
 
 	if (child_pid == -1)
 	{
-		perror("fork");
+		perror("Error forking process");
 		exit(EXIT_FAILURE);
 	}
 	else if (child_pid == 0)
 	{
-		execlp(command, command, (char *)NULL);
-		perror("execlp");
+		char *args[256];
+		int arg_count = 0;
+
+		char *token = strtok((char *)command, " ");
+		while (token != NULL)
+		{
+			args[arg_count++] = token;
+			token = strtok(NULL, " ");
+		}
+		args[arg_count] = NULL;
+
+		execvp(args[0], args);
+
+		tofs_print("Error executing command. \n");
 		exit(EXIT_FAILURE);
 	}
 	else
