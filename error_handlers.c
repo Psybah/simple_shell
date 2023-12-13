@@ -60,4 +60,3 @@ void error_file(char **argv, int c)
 	PRINT("\n");
 	free(er);
 }
-
