@@ -60,4 +60,3 @@ void signal_to_handle(int sig)
 		PRINT("\n$ ");
 	}
 }
-
