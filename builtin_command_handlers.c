@@ -104,3 +104,23 @@ void exit_bul(char **cmd, char *input, char **argv, int c, int stat)
 	}
 }
 
+/**
+ * display_help - Display help information for commands
+ * @cmd: Parsed command strings
+ * @st: Status of last execution
+ * Return: 0 Success -1 Failur
+ */
+
+int display_help(char **cmd, __attribute__((unused))int st)
+{
+	if (cmd[1] != NULL)
+	{
+		/* Display help for a specific command */
+	}
+	else
+	{
+		/* Display general help information for the shell */
+	}
+
+	return (0);
+}
