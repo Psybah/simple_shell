@@ -26,4 +26,3 @@ int history(char *input)
 	}
 	return (1);
 }
-
